@@ -10,7 +10,11 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'npm run build'
+                    if (isUnix()) {
+                        sh 'npm run build'
+                    } else {
+                        bat 'npm run build'
+                    }
                 }
             }
         }
@@ -18,7 +22,11 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'npm test'
+                    if (isUnix()) {
+                        sh 'npm test'
+                    } else {
+                        bat 'npm test'
+                    }
                 }
             }
         }
@@ -26,7 +34,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'npm start'
+                    if (isUnix()) {
+                        sh 'npm start'
+                    } else {
+                        bat 'npm start'
+                    }
                 }
             }
         }
