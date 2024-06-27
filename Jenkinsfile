@@ -33,7 +33,7 @@ pipeline {
         stage('Test Web Application') {
             steps {
                 script {
-                    bat 'npm test'
+                    bat 'npm run start'
                 }
             }
         }
