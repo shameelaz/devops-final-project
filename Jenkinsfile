@@ -33,7 +33,7 @@ pipeline {
         stage('Test Web Application') {
             steps {
                 script {
-                    bat 'npm run start'
+                    bat 'docker run --rm devops-final-project'
                 }
             }
         }
