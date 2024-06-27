@@ -1,62 +1,50 @@
 pipeline {
     agent any
+
     stages {
-        stage('Checkout') {
+        stage('Clean Workspace') {
             steps {
-                echo 'Checking out code...'
+                cleanWs()
+            }
+        }
+
+        stage('Clone Repository') {
+            steps {
                 git 'https://github.com/shameelaz/devops-final-project.git'
             }
         }
 
-        stage('Build') {
+        stage('Set up Docker') {
             steps {
                 script {
-                    echo 'Building the project...'
-                    if (isUnix()) {
-                        sh 'npm run build'
-                    } else {
-                        bat 'npm run build'
-                    }
+                    bat 'docker --version'
                 }
             }
         }
 
-        stage('Test') {
+        stage('Build Docker Images') {
             steps {
                 script {
-                    echo 'Running tests...'
-                    if (isUnix()) {
-                        sh 'npm test'
-                    } else {
-                        bat 'npm test'
-                    }
+                    bat 'docker-compose build'
                 }
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy using Docker Compose') {
             steps {
                 script {
-                    echo 'Deploying the project...'
-                    if (isUnix()) {
-                        sh 'npm start'
-                    } else {
-                        bat 'npm start'
-                    }
+                    bat 'docker-compose up -d'
                 }
             }
         }
     }
 
     post {
-        always {
-            echo 'Pipeline completed.'
-        }
         success {
-            echo 'Pipeline succeeded!'
+            echo 'Deployment successful!'
         }
         failure {
-            echo 'Pipeline failed.'
+            echo 'Deployment failed!'
         }
     }
 }
