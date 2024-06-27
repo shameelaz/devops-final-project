@@ -7,14 +7,6 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    sh 'npm install --verbose'
-                }
-            }
-        }
-
         stage('Build') {
             steps {
                 script {
