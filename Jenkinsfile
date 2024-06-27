@@ -1,22 +1,54 @@
 pipeline {
     agent any
+
+    environment {
+        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+    }
+
     stages {
-        stage('Build') {
+        stage('Clean Workspace') {
             steps {
-                sh 'npm install'
+                cleanWs()
             }
         }
-        stage('Test') {
+
+        stage('Clone Repository') {
             steps {
-                sh './jenkins/scripts/test.sh'
+                git 'https://github.com/aizatnazran/devops-project-planner.git'
             }
         }
-        stage('Deliver') { 
+
+        stage('Set up Docker') {
             steps {
-                sh './jenkins/scripts/deliver.sh' 
-                input message: 'Finished using the web site? (Click "Proceed" to continue)' 
-                sh './jenkins/scripts/kill.sh' 
+                script {
+                    bat 'docker --version'
+                }
             }
+        }
+
+        stage('Build Docker Images') {
+            steps {
+                script {
+                    bat 'docker-compose build'
+                }
+            }
+        }
+
+        stage('Deploy using Docker Compose') {
+            steps {
+                script {
+                    bat 'docker-compose up -d'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
         }
     }
 }
