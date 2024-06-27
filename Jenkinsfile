@@ -30,10 +30,10 @@ pipeline {
             }
         }
 
-        stage('Test Web Application') {
+        stage('Deploy using Docker Compose') {
             steps {
                 script {
-                    bat 'docker run --rm devops-final-project'
+                    bat 'docker-compose up -d'
                 }
             }
         }
