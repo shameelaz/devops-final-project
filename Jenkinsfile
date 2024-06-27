@@ -10,7 +10,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    sh 'npm install'
+                    sh 'npm install --verbose'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'npm run deploy'
+                    sh 'npm start'
                 }
             }
         }
