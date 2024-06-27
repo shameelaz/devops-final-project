@@ -25,7 +25,7 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    bat 'docker-compose build'
+                    bat 'docker build -t devops-final-project .'
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy using Docker Compose') {
             steps {
                 script {
-                    bat 'docker-compose up -d'
+                    bat 'docker compose up -d'
                 }
             }
         }
