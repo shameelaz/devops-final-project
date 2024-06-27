@@ -30,10 +30,10 @@ pipeline {
             }
         }
 
-        stage('Deploy using Docker Compose') {
+        stage('Serve Web Application') {
             steps {
                 script {
-                    bat 'docker compose up -d'
+                    bat 'npm start'
                 }
             }
         }
