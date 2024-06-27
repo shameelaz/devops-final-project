@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                echo 'Checking out code...'
                 git 'https://github.com/shameelaz/devops-final-project.git'
             }
         }
@@ -10,6 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    echo 'Building the project...'
                     if (isUnix()) {
                         sh 'npm run build'
                     } else {
@@ -22,6 +24,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
+                    echo 'Running tests...'
                     if (isUnix()) {
                         sh 'npm test'
                     } else {
@@ -34,6 +37,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    echo 'Deploying the project...'
                     if (isUnix()) {
                         sh 'npm start'
                     } else {
