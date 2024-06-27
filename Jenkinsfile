@@ -30,9 +30,11 @@ pipeline {
             }
         }
 
-        stage('Test App') { 
+        stage('Test Web Application') {
             steps {
-                sh './src/App.js' 
+                script {
+                    bat 'npm start'
+                }
             }
         }
     }
