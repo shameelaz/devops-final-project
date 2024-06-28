@@ -25,7 +25,12 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    bat 'docker build -t devops-final-project .'
+                    bat 'docker build -t task-1 .'
+                }
+            }
+            steps {
+                script {
+                    bat 'docker build -t task-2 .'
                 }
             }
         }
