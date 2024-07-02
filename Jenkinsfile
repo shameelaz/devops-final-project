@@ -14,13 +14,13 @@ pipeline {
             }
         }
 
-        stage('Set up Docker') {
-            steps {
-                script {
-                    sh 'docker --version'
-                }
-            }
-        }
+        // stage('Set up Docker') {
+        //     steps {
+        //         script {
+        //             sh 'docker --version'
+        //         }
+        //     }
+        // }
 
         stage('Build Docker Images') {
             steps {
