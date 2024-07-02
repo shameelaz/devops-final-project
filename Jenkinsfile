@@ -17,7 +17,7 @@ pipeline {
         stage('Set up Docker') {
             steps {
                 script {
-                    bat 'docker --version'
+                    sh 'docker --version'
                 }
             }
         }
@@ -25,12 +25,7 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    bat 'docker build -t task-1 .'
-                }
-            }
-            steps {
-                script {
-                    bat 'docker build -t task-2 .'
+                    sh 'docker build -t devops-final-project-web ./web'
                 }
             }
         }
@@ -38,7 +33,7 @@ pipeline {
         stage('Deploy using Docker Compose') {
             steps {
                 script {
-                    bat 'docker-compose up -d'
+                    sh 'docker-compose up -d'
                 }
             }
         }
