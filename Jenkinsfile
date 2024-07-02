@@ -25,9 +25,8 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    bat 'docker build -t service1 -f Dockerfile.service1 .'
-                    bat 'docker build -t service2 -f Dockerfile.service2 .'
-                    // Add more services as needed
+                    bat 'powershell Start-Process "docker" -ArgumentList "build -t service1 -f Dockerfile.service1 ." -Verb RunAs'
+                    bat 'powershell Start-Process "docker" -ArgumentList "build -t service2 -f Dockerfile.service2 ." -Verb RunAs'
                 }
             }
         }
@@ -35,7 +34,7 @@ pipeline {
         stage('Deploy using Docker Compose') {
             steps {
                 script {
-                    bat 'docker-compose up -d'
+                    bat 'powershell Start-Process "docker-compose" -ArgumentList "up -d" -Verb RunAs'
                 }
             }
         }
