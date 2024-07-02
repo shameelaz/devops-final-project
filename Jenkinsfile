@@ -25,7 +25,9 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    sh 'docker build -t devops-final-project-web ./web'
+                    sh 'docker build -t service1 -f Dockerfile.service1 .'
+                    sh 'docker build -t service2 -f Dockerfile.service2 .'
+                    // Add more services as needed
                 }
             }
         }
