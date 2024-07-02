@@ -17,7 +17,7 @@ pipeline {
         stage('Set up Docker') {
             steps {
                 script {
-                    sh 'docker --version'
+                    bat 'docker --version'
                 }
             }
         }
@@ -25,8 +25,8 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    sh 'docker build -t service1 -f Dockerfile.service1 .'
-                    sh 'docker build -t service2 -f Dockerfile.service2 .'
+                    bat 'docker build -t service1 -f Dockerfile.service1 .'
+                    bat 'docker build -t service2 -f Dockerfile.service2 .'
                     // Add more services as needed
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
         stage('Deploy using Docker Compose') {
             steps {
                 script {
-                    sh 'docker-compose up -d'
+                    bat 'docker-compose up -d'
                 }
             }
         }
